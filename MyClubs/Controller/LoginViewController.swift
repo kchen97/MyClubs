@@ -7,21 +7,61 @@
 //
 
 import UIKit
+import Firebase
+import PKHUD
+import ChameleonFramework
 
-class LoginViewController: UIViewController {
-
+class LoginViewController: UIViewController, UITextFieldDelegate {
+    
+    //MARK: Properties
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
         // Do any additional setup after loading the view.
     }
-
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    //MARK: Actions
+    @IBAction func loginButtonPressed(_ sender: UIButton) {
+        
+        HUD.show(.progress)
+        
+        if let email = emailTextField.text, let password = passwordTextField.text {
+            
+            FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
+                if error != nil {
+                    print((error?.localizedDescription)!)
+                    self.displayErrorHUD((error?.localizedDescription)!)
+                }
+                else {
+                    HUD.show(.success)
+                }
+            })
+        }
+    }
+    
+    func displayErrorHUD(_ subtitle: String) {
+        let errorMessageHUD = PKHUDErrorView(title: "Error", subtitle: subtitle)
+        PKHUD.sharedHUD.contentView = errorMessageHUD
+        PKHUD.sharedHUD.show()
+        PKHUD.sharedHUD.hide(afterDelay: 2.0)
+    }
+    
     /*
     // MARK: - Navigation
 

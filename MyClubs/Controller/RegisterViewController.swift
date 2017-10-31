@@ -50,7 +50,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             if password == confirmedPassword {
                 FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
                     if error != nil {
-                        print(error?.localizedDescription)
+                        print((error?.localizedDescription)!)
                         self.displayErrorHUD((error?.localizedDescription)!)
                     }
                     else {
