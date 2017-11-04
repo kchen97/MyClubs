@@ -10,8 +10,8 @@ import UIKit
 import Firebase
 import PKHUD
 
-class RegisterViewController: UIViewController, UITextFieldDelegate {
-
+class RegisterViewController: UIViewController, UITextFieldDelegate, RegisterAddDelegate {
+    
     //MARK: Properties
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var userNameTextField: UITextField!
@@ -56,6 +56,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                     else {
                         print("Successfully created user")
                         HUD.flash(.success, delay: 1.5)
+                        self.performSegue(withIdentifier: "goFromRegisterToClub", sender: self)
                     }
                 })
             }
@@ -75,14 +76,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         PKHUD.sharedHUD.hide(afterDelay: 2.0)
     }
     
-    /*
-     MARK: - Navigation
-
-     In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         Get the new view controller using segue.destinationViewController.
-         Pass the selected object to the new view controller.
+    func configureItemNames(_ mode: String, _ firstTextFieldHolder: String, _ secondTextFieldHolder: String, _ thirdTextFieldHolder: String, _ fourthTextFieldHolder: String) {
+        
+        //Complete this
     }
-    */
 
 }

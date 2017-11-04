@@ -49,7 +49,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     self.displayErrorHUD((error?.localizedDescription)!)
                 }
                 else {
-                    HUD.show(.success)
+                    HUD.flash(.success, delay: 1.0)
+                    self.performSegue(withIdentifier: "goFromLoginToClub", sender: self)
                 }
             })
         }

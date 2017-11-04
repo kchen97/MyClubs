@@ -38,10 +38,10 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3SE-Rq-eE9">
-                                <rect key="frame" x="30" y="273.5" width="315" height="120"/>
+                                <rect key="frame" x="37" y="238.5" width="300" height="190"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5P-JP-als">
-                                        <rect key="frame" x="0.0" y="0.0" width="315" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
                                         <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="DS6-Zf-wK1"/>
@@ -54,8 +54,19 @@
                                             <segue destination="68P-yU-PRn" kind="show" identifier="goToLogin" id="0a5-Ao-3Qs"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gox-MR-8ve">
+                                        <rect key="frame" x="0.0" y="70" width="300" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="KU1-g8-pN7"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="Add Club"/>
+                                        <connections>
+                                            <action selector="goToAddOrRegister:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MIM-67-yw0"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRL-Oi-t8L">
-                                        <rect key="frame" x="0.0" y="70" width="315" height="50"/>
+                                        <rect key="frame" x="0.0" y="140" width="300" height="50"/>
                                         <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="8ZV-4H-R8s"/>
@@ -65,29 +76,33 @@
                                             <color key="titleColor" red="1" green="0.99826401470000004" blue="0.98544901610000002" alpha="1" colorSpace="deviceRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="IyL-Ek-luX" kind="show" id="4cs-ph-Jvt"/>
+                                            <action selector="goToAddOrRegister:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QdT-Aj-WJK"/>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="W2h-pL-oXg"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="o87-v5-mnL" secondAttribute="bottom" id="2jv-G1-tdj"/>
-                            <constraint firstItem="3SE-Rq-eE9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="2tU-cz-nr9"/>
                             <constraint firstItem="o87-v5-mnL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="4Ae-gm-XMk"/>
-                            <constraint firstItem="3SE-Rq-eE9" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="4eG-fl-kFi"/>
                             <constraint firstItem="o87-v5-mnL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="MsP-b9-2tZ"/>
-                            <constraint firstItem="3SE-Rq-eE9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="P3Q-R3-Lyu"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3SE-Rq-eE9" secondAttribute="trailing" constant="30" id="RIe-EK-4DV"/>
+                            <constraint firstItem="3SE-Rq-eE9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="b3T-cZ-Oyc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="o87-v5-mnL" secondAttribute="trailing" id="bJd-bB-Kp2"/>
+                            <constraint firstItem="3SE-Rq-eE9" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="u5S-dY-JVA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Welcome" id="0CC-dn-eTb"/>
                     <connections>
+                        <outlet property="addClubButton" destination="Gox-MR-8ve" id="hUt-z7-Fzs"/>
                         <outlet property="loginButton" destination="q5P-JP-als" id="n2t-9t-rH3"/>
                         <outlet property="registerButton" destination="eRL-Oi-t8L" id="hrO-Rw-bSr"/>
+                        <segue destination="IyL-Ek-luX" kind="push" identifier="goToAddClub" id="ku8-W9-Qsp"/>
+                        <segue destination="IyL-Ek-luX" kind="push" identifier="goToRegister" id="HIJ-rC-ggP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -161,11 +176,12 @@
                     <connections>
                         <outlet property="emailTextField" destination="pms-Au-ql2" id="dGn-Qc-eiW"/>
                         <outlet property="passwordTextField" destination="5Yy-RX-OcY" id="kia-QE-6iC"/>
+                        <segue destination="nCb-KJ-aLf" kind="push" identifier="goFromLoginToClub" id="hqp-1a-rk3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uwr-GS-yVu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="880.79999999999995" y="685.90704647676171"/>
+            <point key="canvasLocation" x="881" y="645"/>
         </scene>
         <!--Registration-->
         <scene sceneID="hW0-oe-ab4">
@@ -251,19 +267,54 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fpP-WM-JkH"/>
                     </view>
+                    <navigationItem key="navigationItem" id="RPf-yr-nWO"/>
                     <connections>
                         <outlet property="confirmPasswordTextField" destination="gbP-7M-AjA" id="OFl-Ab-9Af"/>
                         <outlet property="emailTextField" destination="ItR-vh-kjK" id="FhT-up-Old"/>
                         <outlet property="passwordTextField" destination="fC1-Fr-0uc" id="TQS-S7-UdA"/>
                         <outlet property="userNameTextField" destination="6jl-Cy-Z04" id="uUB-4E-vPf"/>
+                        <segue destination="nCb-KJ-aLf" kind="push" identifier="goFromRegisterToClub" id="lUx-ze-8N8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9H5-cb-yzX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="880.79999999999995" y="-17.541229385307346"/>
+            <point key="canvasLocation" x="881" y="-34"/>
+        </scene>
+        <!--Club Table View Controller-->
+        <scene sceneID="bvZ-st-kmj">
+            <objects>
+                <tableViewController id="nCb-KJ-aLf" customClass="ClubTableViewController" customModule="MyClubs" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5E1-Df-X2c">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="clubCell" id="d6p-oK-5AJ">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d6p-oK-5AJ" id="XXg-Ev-D9r">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="nCb-KJ-aLf" id="5e8-ni-YRl"/>
+                            <outlet property="delegate" destination="nCb-KJ-aLf" id="Hid-pd-F06"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="xDT-iW-dwn"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4RZ-Nf-9Mr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1784" y="243"/>
         </scene>
     </scenes>
     <resources>
         <image name="background_2" width="640" height="1136"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="lUx-ze-8N8"/>
+        <segue reference="ku8-W9-Qsp"/>
+    </inferredMetricsTieBreakers>
 </document>
