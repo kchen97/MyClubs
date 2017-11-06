@@ -1,0 +1,6 @@
+framework module Pods_MyClubs {
+  umbrella header "Pods-MyClubs-umbrella.h"
+
+  export *
+  module * { export * }
+}

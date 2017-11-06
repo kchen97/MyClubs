@@ -13,19 +13,27 @@ import PKHUD
 class RegisterViewController: UIViewController, UITextFieldDelegate, RegisterAddDelegate {
     
     //MARK: Properties
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var userNameTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var confirmPasswordTextField: UITextField!
+    @IBOutlet weak var textFieldOne: UITextField!
+    @IBOutlet weak var textFieldTwo: UITextField!
+    @IBOutlet weak var textFieldThree: UITextField!
+    @IBOutlet weak var textFieldFour: UITextField!
+    
+    let code = "Jackie"
+    var registerMode : RegisterControllerMode = .register // Is this a VC that registers a user or a club
+    var holderOne : String?
+    var holderTwo : String?
+    var holderThree : String?
+    var holderFour : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        emailTextField.delegate = self
-        userNameTextField.delegate = self
-        passwordTextField.delegate = self
-        confirmPasswordTextField.delegate = self
+        textFieldOne.delegate = self
+        textFieldTwo.delegate = self
+        textFieldThree.delegate = self
+        textFieldFour.delegate = self
         
+        configureUI()
         // Do any additional setup after loading the view.
     }
 
@@ -44,8 +52,16 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, RegisterAdd
     @IBAction func createButtonPresed(_ sender: UIButton) {
         
         HUD.show(.progress)
-        
-        if let email = emailTextField.text, let username = userNameTextField.text, let password = passwordTextField.text, let confirmedPassword = confirmPasswordTextField.text {
+        if registerMode == .register {
+            addUser()
+        }
+        else {
+            addClub()
+        }
+    }
+    
+    func addUser() {
+        if let email = textFieldOne.text, let username = textFieldTwo.text, let password = textFieldThree.text, let confirmedPassword = textFieldFour.text {
             
             if password == confirmedPassword {
                 FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
@@ -56,6 +72,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, RegisterAdd
                     else {
                         print("Successfully created user")
                         HUD.flash(.success, delay: 1.5)
+                        let usersRef = FIRDatabase.database().reference().child("Users")
+                        usersRef.setValue((user?.uid)!)
+                        
                         self.performSegue(withIdentifier: "goFromRegisterToClub", sender: self)
                     }
                 })
@@ -69,6 +88,45 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, RegisterAdd
         }
     }
     
+    func addClub() {
+        if let email = textFieldOne.text, let password = textFieldTwo.text, let clubName = textFieldThree.text, let authCode = textFieldFour.text {
+            
+            FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
+                if error != nil {
+                    print((error?.localizedDescription)!)
+                    self.displayErrorHUD((error?.localizedDescription)!)
+                }
+                else {
+                    if authCode == self.code {
+                        let databaseRef = FIRDatabase.database().reference().child(clubName)
+                        let firstUser = ["Email": email, "Title": "President"]
+                        
+                        databaseRef.setValue(firstUser) { (error, reference) in
+                            if error != nil {
+                                print((error?.localizedDescription)!)
+                                self.displayErrorHUD((error?.localizedDescription)!)
+                            }
+                            else {
+                                print("Successfully created club!")
+                                HUD.flash(.success, delay: 1.5)
+                                let databaseRef = FIRDatabase.database().reference().child("Users").child((user?.uid)!)
+                                databaseRef.setValue(clubName)
+                                
+                                self.performSegue(withIdentifier: "goFromRegisterToClub", sender: self)
+                            }
+                        }
+                    }
+                    else {
+                        self.displayErrorHUD("Invalid code: \(authCode)")
+                    }
+                }
+            })
+        }
+        else {
+            displayErrorHUD("Missing some requirements.")
+        }
+    }
+    
     func displayErrorHUD(_ subtitle: String) {
         let errorMessageHUD = PKHUDErrorView(title: "Error", subtitle: subtitle)
         PKHUD.sharedHUD.contentView = errorMessageHUD
@@ -76,9 +134,30 @@ class RegisterViewController: UIViewController, UITextFieldDelegate, RegisterAdd
         PKHUD.sharedHUD.hide(afterDelay: 2.0)
     }
     
-    func configureItemNames(_ mode: String, _ firstTextFieldHolder: String, _ secondTextFieldHolder: String, _ thirdTextFieldHolder: String, _ fourthTextFieldHolder: String) {
+    func configureUI() {
+        if registerMode == .register {
+            navigationItem.title = "Register"
+            textFieldThree.isSecureTextEntry = true
+            textFieldFour.isSecureTextEntry = true
+        }
+        else {
+            navigationItem.title = "Add Club"
+            textFieldTwo.isSecureTextEntry = true
+        }
         
-        //Complete this
+        textFieldOne.placeholder = holderOne
+        textFieldTwo.placeholder = holderTwo
+        textFieldThree.placeholder = holderThree
+        textFieldFour.placeholder = holderFour
+    }
+    
+    func configureItemNames(_ mode: RegisterControllerMode, _ firstTextFieldHolder: String, _ secondTextFieldHolder: String, _ thirdTextFieldHolder: String, _ fourthTextFieldHolder: String) {
+        
+        registerMode = mode
+        holderOne = firstTextFieldHolder
+        holderTwo = secondTextFieldHolder
+        holderThree = thirdTextFieldHolder
+        holderFour = fourthTextFieldHolder
     }
 
 }

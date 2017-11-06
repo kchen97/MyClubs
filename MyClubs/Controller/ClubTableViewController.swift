@@ -39,6 +39,7 @@ class ClubTableViewController: UITableViewController {
     }
     
     func loadUserClubs() {
+        let currentUserUID = FIRAuth.auth()?.currentUser?.uid
         
     }
 }

@@ -60,7 +60,9 @@
                                             <constraint firstAttribute="height" constant="50" id="KU1-g8-pN7"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <state key="normal" title="Add Club"/>
+                                        <state key="normal" title="Add Club">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="goToAddOrRegister:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MIM-67-yw0"/>
                                         </connections>
@@ -101,7 +103,6 @@
                         <outlet property="addClubButton" destination="Gox-MR-8ve" id="hUt-z7-Fzs"/>
                         <outlet property="loginButton" destination="q5P-JP-als" id="n2t-9t-rH3"/>
                         <outlet property="registerButton" destination="eRL-Oi-t8L" id="hrO-Rw-bSr"/>
-                        <segue destination="IyL-Ek-luX" kind="push" identifier="goToAddClub" id="ku8-W9-Qsp"/>
                         <segue destination="IyL-Ek-luX" kind="push" identifier="goToRegister" id="HIJ-rC-ggP"/>
                     </connections>
                 </viewController>
@@ -225,7 +226,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gbP-7M-AjA">
                                         <rect key="frame" x="0.0" y="165" width="250" height="40"/>
@@ -235,7 +236,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -269,10 +270,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="RPf-yr-nWO"/>
                     <connections>
-                        <outlet property="confirmPasswordTextField" destination="gbP-7M-AjA" id="OFl-Ab-9Af"/>
-                        <outlet property="emailTextField" destination="ItR-vh-kjK" id="FhT-up-Old"/>
-                        <outlet property="passwordTextField" destination="fC1-Fr-0uc" id="TQS-S7-UdA"/>
-                        <outlet property="userNameTextField" destination="6jl-Cy-Z04" id="uUB-4E-vPf"/>
+                        <outlet property="textFieldFour" destination="gbP-7M-AjA" id="JP7-jw-XIU"/>
+                        <outlet property="textFieldOne" destination="ItR-vh-kjK" id="yr9-b7-703"/>
+                        <outlet property="textFieldThree" destination="fC1-Fr-0uc" id="XhO-Qf-RuV"/>
+                        <outlet property="textFieldTwo" destination="6jl-Cy-Z04" id="DMA-4W-ite"/>
                         <segue destination="nCb-KJ-aLf" kind="push" identifier="goFromRegisterToClub" id="lUx-ze-8N8"/>
                     </connections>
                 </viewController>
@@ -315,6 +316,5 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="lUx-ze-8N8"/>
-        <segue reference="ku8-W9-Qsp"/>
     </inferredMetricsTieBreakers>
 </document>

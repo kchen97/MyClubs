@@ -9,8 +9,13 @@
 import UIKit
 import ChameleonFramework
 
+enum RegisterControllerMode {
+    case register
+    case addClub
+}
+
 protocol RegisterAddDelegate {
-    func configureItemNames(_ mode: String, _ firstTextFieldHolder: String, _ secondTextFieldHolder: String, _ thirdTextFieldHolder: String, _ fourthTextFieldHolder: String)
+    func configureItemNames(_ mode: RegisterControllerMode, _ firstTextFieldHolder: String, _ secondTextFieldHolder: String, _ thirdTextFieldHolder: String, _ fourthTextFieldHolder: String)
 }
 
 class WelcomeViewController: UIViewController {
@@ -36,12 +41,14 @@ class WelcomeViewController: UIViewController {
     
     @IBAction func goToAddOrRegister(_ sender: UIButton) {
         if sender == registerButton {
-            delegate?.configureItemNames("Register", "Email", "Username", "Password", "Confirm Password")
             performSegue(withIdentifier: "goToRegister", sender: self)
+            delegate?.configureItemNames(.register, "Email", "Username", "Password", "Confirm Password")
+            print("in register")
         }
         else if sender == addClubButton {
-            delegate?.configureItemNames("Add", "Email", "Password", "Club Name", "Auth Code")
-            performSegue(withIdentifier: "goToAddClub", sender: self)
+            performSegue(withIdentifier: "goToRegister", sender: self)
+            print("In add club")
+            delegate?.configureItemNames(.addClub, "Email", "Password", "Club Name", "Auth Code")
         }
     }
     
